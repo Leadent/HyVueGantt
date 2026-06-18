@@ -6,7 +6,6 @@
   "scripts": {
     "serve": "vite --host",
     "build": "npm run build:types && npm run build:lib",
-    "prepare": "npm run build",
     "build:lib": "vite build",
     "build:types": "vue-tsc --declaration --emitDeclarationOnly --declarationMap false --outDir lib_types -p tsconfig.build.json",
     "typecheck": "vue-tsc --noEmit",

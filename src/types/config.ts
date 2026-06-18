@@ -103,6 +103,7 @@ export interface GGanttChartProps {
   tick?: number
   autoScrollToToday?: boolean
   showPlannedBars?: boolean
+  createGroupBarsFromChildren?: boolean
 }
 
 export type GGanttChartConfig = ToRefs<Required<GGanttChartProps>> & {

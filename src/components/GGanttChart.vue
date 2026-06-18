@@ -159,7 +159,8 @@ const props = withDefaults(defineProps<GGanttChartProps>(), {
   minZoom: 1,
   tick: 0,
   autoScrollToToday: false,
-  showPlannedBars: false
+  showPlannedBars: false,
+  createGroupBarsFromChildren: true
 })
 
 // Events
@@ -235,6 +236,7 @@ const rowManager = useRows(
     barStart: toRef(props, "barStart"),
     barEnd: toRef(props, "barEnd"),
     dateFormat: toRef(props, "dateFormat"),
+    createGroupBarsFromChildren: computed(() => props.createGroupBarsFromChildren),
     multiColumnLabel: toRef(props, "multiColumnLabel"),
     onSort: (sortState) => emit("sort", { sortState }),
     initialSort: props.initialSort,

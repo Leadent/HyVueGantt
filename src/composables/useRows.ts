@@ -49,6 +49,7 @@ export interface UseRowsProps {
   barStart: Ref<string>
   barEnd: Ref<string>
   dateFormat: Ref<string | false>
+  createGroupBarsFromChildren?: Ref<boolean>
   multiColumnLabel: Ref<LabelColumnConfig[]>
   onSort: (sortState: SortState) => void
   initialSort?: SortState
@@ -458,6 +459,7 @@ export const useRows = (
     barStart,
     barEnd,
     dateFormat,
+    createGroupBarsFromChildren,
     multiColumnLabel,
     onSort,
     initialSort,
@@ -653,6 +655,24 @@ export const useRows = (
   const calculateGroupBars = (row: ChartRow): GanttBarObject[] => {
     // No children prop at all → plain row, show user-defined bars
     if (!row.children) return row.bars || []
+
+    // When disabled, groups render only the bars explicitly provided in data.
+    if (createGroupBarsFromChildren?.value === false) {
+      row.bars.forEach(
+        (bar) =>
+          (bar.ganttBarConfig = {
+            id: `lead-${row.id || row.label}`,
+            immobile: true,
+            label: row.label,
+            style: {
+              background: "transparent",
+              cursor: "pointer"
+            },
+            connections: row.connections || []
+          })
+      )
+      return row.bars || []
+    }
 
     const allChildBars = row.children.flatMap((child): GanttBarObject[] => {
       const childGroupBars = calculateGroupBars(child)

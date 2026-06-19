@@ -658,19 +658,6 @@ export const useRows = (
 
     // When disabled, groups render only the bars explicitly provided in data.
     if (createGroupBarsFromChildren?.value === false) {
-      row.bars.forEach(
-        (bar) =>
-          (bar.ganttBarConfig = {
-            id: `lead-${row.id || row.label}`,
-            immobile: true,
-            label: row.label,
-            style: {
-              background: "transparent",
-              cursor: "pointer"
-            },
-            connections: row.connections || []
-          })
-      )
       return row.bars || []
     }
 

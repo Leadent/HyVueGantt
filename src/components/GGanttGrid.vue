@@ -125,7 +125,7 @@ const getDateRangeHighlightColor = (date: Date, cellDurationMs: number): string 
         v-for="({ label, date, width }, index) in timeaxisUnits.result.lowerUnits"
         :key="`${label}_${index}`"
         class="g-grid-line"
-        :class="highlightLine(date) ? 'g-grid-highlighted' : 'g-grid-normal'"
+        :class="highlightLine(date) ? 'g-grid-highlighted' : ''"
         :style="{
           width,
           borderLeft: `1px solid ${colors.gridAndBorder}`,
@@ -147,7 +147,7 @@ const getDateRangeHighlightColor = (date: Date, cellDurationMs: number): string 
         <div
           v-for="step in timeaxisUnits.globalMinuteStep"
           :key="`${date}-${step}`"
-          :class="step"
+          :class="[step, highlightLine(date) ? 'g-grid-highlighted' : '']"
           class="g-grid-line step"
           :style="{
             width,
